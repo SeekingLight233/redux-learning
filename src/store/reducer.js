@@ -26,9 +26,8 @@ export default (state = defaultState, action) => {
   }
 
   if (action.type === DELETE_ITEM) {
+    //这里的action.index为什么是个点击事件？？
     const newState = JSON.parse(JSON.stringify(state))
-    console.log("delete")
-    console.log(action)
     newState.list.splice(action.index, 1) //找到下标，删除一项
     return newState
   }
