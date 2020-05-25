@@ -35,7 +35,7 @@ class TodoList extends React.Component {
 
   componentDidMount() {
     const action = getTodoList()
-    //当action为函数时，一旦被dispatch就会被执行
+    //redux-thunk对dispatch方法进行了升级，让它拥有了执行函数的能力
     store.dispatch(action)
   }
   handleInputChange(e) {
