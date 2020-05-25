@@ -34,9 +34,7 @@ class TodoList extends React.Component {
   }
 
   componentDidMount() {
-    axios.get("https://www.jixieclub.com:3002/list?Pnum=1").then((res) => {
-      //假设请求下来的数据是这玩意
-      res.data = ["hello", "jason", "lee"]
+    axios.get("http://39.107.97.170:3002/list").then((res) => {
       const data = res.data
       //获取action
       const action = initListAction(data)
