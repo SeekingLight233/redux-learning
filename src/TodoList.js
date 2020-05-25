@@ -1,13 +1,13 @@
 import React from "react"
 import TodoListUI from "./TodoListUI"
 import "antd/dist/antd.css"
-import axios from "axios"
+
 import store from "./store/index"
 import {
   getInputChangeAction,
   getAddItemAction,
   getDeleteItemAction,
-  initListAction,
+  getTodoList,
 } from "./store/actionCreators"
 
 class TodoList extends React.Component {
@@ -34,14 +34,9 @@ class TodoList extends React.Component {
   }
 
   componentDidMount() {
-    axios.get("http://39.107.97.170:3002/list").then((res) => {
-      const data = res.data
-      //获取action
-      const action = initListAction(data)
-      console.log(action.data)
-      //将action dispatch给store
-      store.dispatch(action)
-    })
+    const action = getTodoList()
+    //当action为函数时，一旦被dispatch就会被执行
+    store.dispatch(action)
   }
   handleInputChange(e) {
     const action = getInputChangeAction(e.target.value)
@@ -60,7 +55,6 @@ class TodoList extends React.Component {
   }
   handleItemDelete(index) {
     const action = getDeleteItemAction(index)
-    console.log(`父元素获取到的值${index}`)
     store.dispatch(action)
   }
 }

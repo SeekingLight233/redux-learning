@@ -25,7 +25,8 @@ const TodoListUI = (props) => {
         dataSource={props.list} //渲染data中的数据
         renderItem={(item, index) => (
           <List.Item
-            onClick={(index) => {
+            onClick={(e) => {
+              console.log(e) //这里面的第一个参数默认是事件点击对象！！！！！！！！！！！！
               props.handleItemDelete(index)
             }}
           >
