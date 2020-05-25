@@ -1,7 +1,12 @@
 /**
  * state为store中的数据
  */
-import { CHANGE_INPUT_VALUE, ADD_ITEM, DELETE_ITEM } from "./actionTypes"
+import {
+  CHANGE_INPUT_VALUE,
+  ADD_ITEM,
+  DELETE_ITEM,
+  INIT_LIST,
+} from "./actionTypes"
 const defaultState = {
   inputValue: "",
   list: [],
@@ -26,10 +31,15 @@ export default (state = defaultState, action) => {
   }
 
   if (action.type === DELETE_ITEM) {
-    //这里的action.index为什么是个点击事件？？
     const newState = JSON.parse(JSON.stringify(state))
     newState.list.splice(action.index, 1) //找到下标，删除一项
     return newState
   }
+  if (action.type === INIT_LIST) {
+    const newState = JSON.parse(JSON.stringify(state))
+    newState.list = action.data
+    return newState
+  }
+
   return state
 }

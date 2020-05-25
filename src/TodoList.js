@@ -1,12 +1,13 @@
 import React from "react"
 import TodoListUI from "./TodoListUI"
 import "antd/dist/antd.css"
-
+import axios from "axios"
 import store from "./store/index"
 import {
   getInputChangeAction,
   getAddItemAction,
   getDeleteItemAction,
+  initListAction,
 } from "./store/actionCreators"
 
 class TodoList extends React.Component {
@@ -30,6 +31,19 @@ class TodoList extends React.Component {
         list={this.state.list}
       ></TodoListUI>
     )
+  }
+
+  componentDidMount() {
+    axios.get("https://www.jixieclub.com:3002/list?Pnum=1").then((res) => {
+      //假设请求下来的数据是这玩意
+      res.data = ["hello", "jason", "lee"]
+      const data = res.data
+      //获取action
+      const action = initListAction(data)
+      console.log(action.data)
+      //将action dispatch给store
+      store.dispatch(action)
+    })
   }
   handleInputChange(e) {
     const action = getInputChangeAction(e.target.value)
